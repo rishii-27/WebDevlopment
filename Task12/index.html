@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <h2>HTML Forms</h2>
+
+  <form onsubmit="saveToLocalStorage(event)">
+    <label for=" fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" required><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" required><br>
+    <label for="emailid">Email Id:</label><br>
+    <input type="email" id="emailid" name="emailid"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  <ul id="addedItem"></ul>
+  <script>
+    function saveToLocalStorage(event) {
+      event.preventDefault();
+      var firstname = event.target.fname.value;
+      var lastname = event.target.lname.value;
+      var emailaddr = event.target.emailid.value;
+      // localStorage.setItem('firstname', firstname);
+      // localStorage.setItem('lname', lastname);
+      // localStorage.setItem('emailid', emailaddr);
+
+      var obj = {
+        firstname, lastname, emailaddr
+      }
+
+      localStorage.setItem(obj.emailaddr, JSON.stringify(obj))
+
+      // var objDeserialized = JSON.parse(localStorage.getItem('userDetails'));
+      // console.log(objDeserialized)
+
+      showOnScreen(obj);
+    }
+
+    function showOnScreen(user) {
+      var parentNode = document.getElementById('addedItem');
+      var childHTML = `<li> ${user.firstname} ${user.lastname} has email ID ${user.emailaddr} </li>`;
+      parentNode.innerHTML = parentNode.innerHTML + childHTML;
+
+      // const editBtn = document.createElement('button');
+      // editBtn.appendChild(document.createTextNode('Edit'));
+      // parentNode.appendChild(editBtn);
+    }
+  </script>
+</body>
+
+</html>
